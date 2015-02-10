@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.thomasuster"  >
     <uses-permission android:name="android.permission.VIBRATE"></uses-permission>
     <application>
-        <receiver android:name=".receivers.Notify" />
+        <service android:name=".NotificationService" />
         <receiver android:name=".receivers.Launch" />
     </application>
 </manifest>

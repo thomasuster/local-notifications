@@ -1,7 +1,6 @@
 package com.thomasuster;
 
 import com.thomasuster.receivers.Launch;
-import com.thomasuster.receivers.Notify;
 import org.haxe.extension.Extension;
 import android.content.Context;
 import android.app.Activity;
@@ -26,11 +25,11 @@ public class LocalNotifications extends Extension {
     public static void schedule(int id, String title, String textContent, int ms) {
         System.out.println("schedule!!!");
 
-        Intent intent = new Intent(mainContext, Notify.class);
+        Intent intent = new Intent(mainContext, NotificationService.class);
         intent.putExtra("id", id);
         intent.putExtra("notification", makeNotification(title, textContent));
 
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(mainContext, id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getService(mainContext, id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         long delay = SystemClock.elapsedRealtime() + ms;
         AlarmManager alarmManager = (AlarmManager) mainContext.getSystemService(Context.ALARM_SERVICE);
         alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, delay, pendingIntent);
