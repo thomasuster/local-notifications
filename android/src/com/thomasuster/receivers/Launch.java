@@ -9,23 +9,24 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import com.thomasuster.LocalNotifications;
 import org.haxe.extension.Extension;
+import android.os.SystemClock;
+import android.content.pm.PackageManager;
+import android.app.AlarmManager;
 
 public class Launch extends BroadcastReceiver {
 
-    Context context;
-
     @Override
     public void onReceive(Context context, Intent intent) {
-        this.context = context;
-//        String pac = intent.getStringExtra("title");
-//        PackageManager manager = context.getPackageManager();
-//        Intent i = manager.getLaunchIntentForPackage("org.openfl.samples.piratepig");
-//        i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-//        context.startActivity(i);
+        PackageManager manager = context.getPackageManager();
+        String packageName = intent.getStringExtra("packageName");
+        Intent launchIntent = manager.getLaunchIntentForPackage(packageName);
+        launchIntent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, launchIntent, Intent.FLAG_ACTIVITY_NEW_TASK);
 
-
+        long ms = SystemClock.elapsedRealtime() + 300;
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, ms, pendingIntent);
     }
-
-
 }

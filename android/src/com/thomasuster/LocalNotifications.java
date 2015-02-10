@@ -38,7 +38,7 @@ public class LocalNotifications extends Extension {
 
     private static Notification makeNotification(String title, String textContent) {
         Intent intent = new Intent(mainContext, Launch.class);
-        intent.setAction("launch");
+        intent.putExtra("packageName", mainContext.getPackageName());
         PendingIntent pendingIntent = PendingIntent.getBroadcast(mainContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         long[] vibratePattern = {0, 1000};
         Bitmap large_icon = BitmapFactory.decodeResource(Extension.mainContext.getResources(), R.drawable.large_icon);
@@ -51,10 +51,10 @@ public class LocalNotifications extends Extension {
                 .setAutoCancel(true)
                 .setVibrate(vibratePattern)
                 .setContentIntent(pendingIntent);
-        return makeTiny(builder.build());
+        return compress(builder.build());
     }
 
-    private static Notification makeTiny(Notification n) {
+    private static Notification compress(Notification n) {
         n.largeIcon = null;
         return n;
     }
