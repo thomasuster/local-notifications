@@ -1,4 +1,4 @@
-package com.thomasuster.receivers;
+package com.thomasuster;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -8,7 +8,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.SystemClock;
 
-public class Launch extends BroadcastReceiver {
+public class LaunchReceiver extends BroadcastReceiver {
 
     Context context;
 

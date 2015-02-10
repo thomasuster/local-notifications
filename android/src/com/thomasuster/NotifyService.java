@@ -9,7 +9,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import com.thomasuster.receivers.Launch;
 
 public class NotifyService extends IntentService {
 
@@ -34,7 +33,7 @@ public class NotifyService extends IntentService {
     }
 
     private Notification makeNotification() {
-        Intent intent = new Intent(this, Launch.class);
+        Intent intent = new Intent(this, LaunchReceiver.class);
         intent.putExtra("packageName", packageName);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         long[] vibratePattern = {0, 1000};
