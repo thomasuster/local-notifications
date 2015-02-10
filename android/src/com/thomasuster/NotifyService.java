@@ -19,14 +19,13 @@ public class NotifyService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        int id = intent.getIntExtra("id", 0);
         String packageName = intent.getStringExtra("packageName");
         String title = intent.getStringExtra("title");
         String textContent = intent.getStringExtra("textContent");
 
         Notification notification = makeNotification(packageName, title, textContent);
         NotificationManager notificationManager = (NotificationManager)this.getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(id,notification);
+        notificationManager.notify(0,notification);
     }
 
     private Notification makeNotification(String packageName, String title, String textContent) {

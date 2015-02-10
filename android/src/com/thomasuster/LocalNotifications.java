@@ -17,7 +17,6 @@ public class LocalNotifications extends Extension {
 
     public static void schedule(int id, String title, String textContent, int ms) {
         Intent intent = new Intent(mainContext, NotifyService.class);
-        intent.putExtra("id", id);
         intent.putExtra("packageName", mainContext.getPackageName());
         intent.putExtra("title", title);
         intent.putExtra("textContent", textContent);
