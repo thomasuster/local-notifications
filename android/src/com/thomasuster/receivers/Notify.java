@@ -1,4 +1,4 @@
-package com.thomasuster;
+package com.thomasuster.receivers;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -34,36 +34,17 @@ import android.graphics.BitmapFactory;
 import android.graphics.Bitmap;
 import android.util.Log;
 import android.os.SystemClock;
+import com.thomasuster.R;
 
-public class NotifyReceiver extends BroadcastReceiver {
-
-    Context context;
+public class Notify extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        this.context = context;
         int id = intent.getIntExtra("id", 0);
-        String title = intent.getStringExtra("title");
-        String textContent = intent.getStringExtra("textContent");
-        notify(id, title, textContent);
-    }
-
-    private void notify(int id, String title, String textContent) {
-        Intent intent = new Intent(context, NotifyReceiver.class);
-        intent.setAction("launch");
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        long[] vibratePattern = {0, 1000};
+        Notification notification = intent.getParcelableExtra("notification");
         Bitmap large_icon = BitmapFactory.decodeResource(Extension.mainContext.getResources(), R.drawable.large_icon);
-        Notification.Builder builder = new Notification.Builder(context)
-                .setSmallIcon(R.drawable.small_icon)
-                .setLargeIcon(large_icon)
-                .setContentTitle(title)
-                .setContentText(textContent)
-                .setTicker(textContent)
-                .setAutoCancel(true)
-                .setVibrate(vibratePattern)
-                .setContentIntent(pendingIntent);
+        notification.largeIcon = large_icon;
         NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(id, builder.build());
+        notificationManager.notify(id, notification);
     }
 }
