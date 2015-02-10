@@ -15,11 +15,12 @@ public class LocalNotifications extends Extension {
     public void onCreate(Bundle savedInstanceState) {
     }
 
-    public static void schedule(int id, String title, String textContent, int ms) {
+    public static void schedule(int id, String title, String textContent, int ms, int smallIconColor) {
         Intent intent = new Intent(mainContext, NotifyService.class);
         intent.putExtra("packageName", mainContext.getPackageName());
         intent.putExtra("title", title);
         intent.putExtra("textContent", textContent);
+        intent.putExtra("smallIconColor", smallIconColor);
 
         PendingIntent pendingIntent = PendingIntent.getService(mainContext, id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         long delay = SystemClock.elapsedRealtime() + ms;

@@ -13,22 +13,27 @@ import com.thomasuster.receivers.Launch;
 
 public class NotifyService extends IntentService {
 
+    String packageName;
+    String title;
+    String textContent;
+    int smallIconColor;
+
     public NotifyService() {
         super("NotifyService");
     }
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        String packageName = intent.getStringExtra("packageName");
-        String title = intent.getStringExtra("title");
-        String textContent = intent.getStringExtra("textContent");
-
-        Notification notification = makeNotification(packageName, title, textContent);
+        packageName = intent.getStringExtra("packageName");
+        title = intent.getStringExtra("title");
+        textContent = intent.getStringExtra("textContent");
+        smallIconColor = intent.getIntExtra("smallIconColor",0);
+        Notification notification = makeNotification();
         NotificationManager notificationManager = (NotificationManager)this.getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(0,notification);
     }
 
-    private Notification makeNotification(String packageName, String title, String textContent) {
+    private Notification makeNotification() {
         Intent intent = new Intent(this, Launch.class);
         intent.putExtra("packageName", packageName);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -41,6 +46,7 @@ public class NotifyService extends IntentService {
                 .setContentText(textContent)
                 .setTicker(textContent)
                 .setAutoCancel(true)
+                .setColor(smallIconColor)
                 .setVibrate(vibratePattern)
                 .setContentIntent(pendingIntent);
         return builder.build();

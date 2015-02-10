@@ -13,7 +13,7 @@ class AndroidLocalNotifications implements LocalNotifications {
 
     public function schedule(notification:Notification):Void {
         init();
-        _schedule(notification.id, notification.title, notification.textContent, notification.milliseconds);
+        _schedule(notification.id, notification.title, notification.textContent, notification.milliseconds, notification.smallIconColor);
     }
 
     public function cancel(id:Int):Void {
@@ -24,7 +24,7 @@ class AndroidLocalNotifications implements LocalNotifications {
     function init():Void {
         if(_schedule == null) {
             #if android
-            _schedule = JNI.createStaticMethod("com/thomasuster/LocalNotifications", "schedule", "(ILjava/lang/String;Ljava/lang/String;I)V");
+            _schedule = JNI.createStaticMethod("com/thomasuster/LocalNotifications", "schedule", "(ILjava/lang/String;Ljava/lang/String;II)V");
             _cancel = JNI.createStaticMethod("com/thomasuster/LocalNotifications", "cancel", "(I)V");
             #end
         }
