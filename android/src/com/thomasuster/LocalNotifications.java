@@ -12,4 +12,13 @@ public class LocalNotifications extends Extension {
     public void onCreate(Bundle savedInstanceState) {
         System.out.println("HELLO WORLD!!!");
     }
+
+    public static void schedule(int id, String title, String textContent, int delay) {
+        System.out.println("schedule!!!");
+    }
+
+    public static void cancel(int id) {
+        System.out.println("cancel!!!");
+    }
+
 }

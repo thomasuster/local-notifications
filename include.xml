@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension>
+
     <classpath name="src" />
 
     <section if="android">
-        <dependency name="local-notifications" path="android/local-notifications" if="android" />
+        <dependency name="local-notifications" path="android" if="android" />
         <android extension="com.thomasuster.LocalNotifications" />
     </section>
 
