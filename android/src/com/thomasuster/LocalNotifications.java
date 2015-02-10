@@ -29,7 +29,10 @@ public class LocalNotifications extends Extension {
     }
 
     public static void cancel(int id) {
-        System.out.println("Implement cancel");
+        Intent intent = new Intent(mainContext, NotifyService.class);
+        PendingIntent pendingIntent = PendingIntent.getService(mainContext, id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager alarmManager = (AlarmManager) mainContext.getSystemService(Context.ALARM_SERVICE);
+        alarmManager.cancel(pendingIntent);
     }
 
 }
