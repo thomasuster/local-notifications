@@ -1,19 +1,12 @@
 package com.thomasuster.receivers;
 
-import android.app.Notification;
-import android.app.Notification.Builder;
-import android.app.NotificationManager;
+import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import com.thomasuster.LocalNotifications;
-import org.haxe.extension.Extension;
-import android.os.SystemClock;
 import android.content.pm.PackageManager;
-import android.app.AlarmManager;
+import android.os.SystemClock;
 
 public class Launch extends BroadcastReceiver {
 
