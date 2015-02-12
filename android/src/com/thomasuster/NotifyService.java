@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
 
 public class NotifyService extends IntentService {
 
@@ -45,9 +46,10 @@ public class NotifyService extends IntentService {
                 .setContentText(textContent)
                 .setTicker(textContent)
                 .setAutoCancel(true)
-                .setColor(smallIconColor)
+//                .setColor(smallIconColor) //API LEVEL 21
                 .setVibrate(vibratePattern)
                 .setContentIntent(pendingIntent);
-        return builder.build();
+//        return builder.build(); //API LEVEL 16
+        return builder.getNotification();
     }
 }
