@@ -10,9 +10,11 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
+import com.thomasuster.persistence.NotificationModel;
 
 public class NotifyService extends IntentService {
 
+    int id;
     String packageName;
     String title;
     String textContent;
@@ -24,13 +26,19 @@ public class NotifyService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
+        id = intent.getIntExtra("id", 0);
         packageName = intent.getStringExtra("packageName");
         title = intent.getStringExtra("title");
         textContent = intent.getStringExtra("textContent");
         smallIconColor = intent.getIntExtra("smallIconColor",0);
+
+        NotificationModel model = new NotificationModel(this);
+        model.remove(id);
+
         Notification notification = makeNotification();
         NotificationManager notificationManager = (NotificationManager)this.getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(0,notification);
+
     }
 
     private Notification makeNotification() {
