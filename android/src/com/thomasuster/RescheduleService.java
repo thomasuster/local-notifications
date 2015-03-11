@@ -34,8 +34,6 @@ public class RescheduleService extends IntentService {
             long ms = cursor.getLong(index);
             Calendar calendar = Calendar.getInstance();
             calendar.setTimeInMillis(ms);
-            System.out.println(ms);
-            System.out.println(now.getTimeInMillis());
             if(calendar.after(now)) {
                 NotificationVO vo = new NotificationVO();
                 vo.id = cursor.getInt(0);
@@ -45,11 +43,6 @@ public class RescheduleService extends IntentService {
                 vo.smallIconColor = cursor.getInt(4);
                 vo.ms = ms;
                 vos.add(vo);
-                System.out.println("Notification is still valid.");
-            }
-            else {
-
-                System.out.println("Notification to old.");
             }
         }
         model.close();
@@ -71,7 +64,6 @@ public class RescheduleService extends IntentService {
             serviceIntent.putExtra("textContent", vo.textContent);
             serviceIntent.putExtra("smallIconColor", vo.smallIconColor);
             serviceIntent.putExtra("ms", vo.ms);
-            System.out.println("Schedule " + vo.id + " in " + vo.ms);
             startService(serviceIntent);
         }
     }
