@@ -32,7 +32,7 @@ public class NotificationModel extends SQLiteOpenHelper {
 
     public void add(NotificationVO vo) {
         String sqlString = "INSERT INTO notifications (id, packageName, title, textContent, smallIconColor, ms)  \n";
-        sqlString += String.format("VALUES (%d,'%s','%s','%s',%d,%d)", vo.id, vo.packageName, vo.title, vo.textContent, vo.smallIconColor, vo.ms);
+        sqlString += String.format("VALUES (%d,\"%s\",\"%s\",\"%s\",%d,%d)", vo.id, vo.packageName, vo.title, vo.textContent, vo.smallIconColor, vo.ms);
         getWritableDatabase().execSQL(sqlString);
         Cursor cursor = getReadableDatabase().query("notifications", null, null, null, null, null, null);
         System.out.println("COUNT IS: " + cursor.getCount());
