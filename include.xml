@@ -7,5 +7,7 @@
         <dependency name="local-notifications" path="android" if="android" />
         <android extension="com.thomasuster.LocalNotifications" />
     </section>
+    
+    <ndll name="localnotifications" />
 
 </extension>
