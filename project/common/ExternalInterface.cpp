@@ -9,8 +9,13 @@ using namespace localnotifications;
 void init_ios(){
     _init_ios();
 }
-
 DEFINE_PRIM (init_ios,0);
+
+static value isAllowed(){
+	int returnValue = _isAllowed();
+    return alloc_int(returnValue);
+}
+DEFINE_PRIM (isAllowed,0);
 
 void schedule(value id, value body, value sec){
     int _id=val_int(id);

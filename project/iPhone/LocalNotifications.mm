@@ -32,15 +32,26 @@ namespace localnotifications {
         }
     }
 
+    int _isAllowed() {
+        UIUserNotificationSettings *grantedSettings = [[UIApplication sharedApplication] currentUserNotificationSettings];
+        if(grantedSettings.types == UIUserNotificationTypeNone)
+            return 0;
+        return 1;
+    }
+
     void _schedule(int id, const char* body, int sec) {
         NSLog(@"Sec: %d", sec);
+
 
         NSString* alertBody=[[NSString alloc] initWithUTF8String:body];
 
         UILocalNotification *notification = [[UILocalNotification alloc] init];
         notification.alertBody = alertBody;
         notification.fireDate = [[NSDate date] dateByAddingTimeInterval:sec];
-        notification.soundName=UILocalNotificationDefaultSoundName;
+
+        UIUserNotificationSettings *grantedSettings = [[UIApplication sharedApplication] currentUserNotificationSettings];
+        if (grantedSettings.types & UIUserNotificationTypeSound)
+            notification.soundName=UILocalNotificationDefaultSoundName;
 
         NSDictionary *userDict = [NSDictionary dictionaryWithObjectsAndKeys:
                                              [NSNumber numberWithInt:id],@"id",

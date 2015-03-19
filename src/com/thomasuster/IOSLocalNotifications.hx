@@ -1,10 +1,11 @@
 package com.thomasuster;
 import cpp.Lib;
-class IOSLocalNotifications implements LocalNotifications {
+class IOSLocalNotifications implements InitRequiredLocalNotifications {
 
     static var _init_ios:Dynamic;
     static var _schedule:Dynamic;
     static var _cancel:Dynamic;
+    static var _isAllowed:Dynamic;
 
     public function new():Void {}
 
@@ -18,7 +19,7 @@ class IOSLocalNotifications implements LocalNotifications {
         _cancel(id);
     }
 
-    function init():Void {
+    public function init():Void {
         if(_init_ios == null) {
             #if ios
             _init_ios = Lib.load("localnotification","init_ios",0);
@@ -27,5 +28,13 @@ class IOSLocalNotifications implements LocalNotifications {
             #end
             _init_ios();
         }
+    }
+
+    public function isAllowed():Bool {
+        if(_isAllowed == null)
+            _isAllowed = Lib.load("localnotification","isAllowed",0);
+        if(_isAllowed() == 0)
+            return false;
+        return true;
     }
 }
