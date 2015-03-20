@@ -4,7 +4,7 @@ class IOSLocalNotifications implements InitRequiredLocalNotifications {
 
     static var _init_ios:Dynamic;
     static var _schedule:Dynamic;
-    static var _cancel:Dynamic;
+    static var _cancelAll:Dynamic;
     static var _isAllowed:Dynamic;
 
     public function new():Void {}
@@ -14,9 +14,9 @@ class IOSLocalNotifications implements InitRequiredLocalNotifications {
         _schedule(notification.id, notification.textContent, Math.round(notification.milliseconds/1000));
     }
 
-    public function cancel(id:Int){
+    public function cancelAll(){
         init();
-        _cancel(id);
+        _cancelAll();
     }
 
     public function init():Void {
@@ -24,7 +24,7 @@ class IOSLocalNotifications implements InitRequiredLocalNotifications {
             #if ios
             _init_ios = Lib.load("localnotification","init_ios",0);
             _schedule = Lib.load("localnotification","schedule",3);
-            _cancel = Lib.load("localnotification","cancel",1);
+            _cancelAll = Lib.load("localnotification","cancelAll",0);
             #end
             _init_ios();
         }

@@ -7,7 +7,7 @@ import openfl.utils.JNI;
 class AndroidLocalNotifications implements LocalNotifications {
 
     static var _schedule:Dynamic;
-    static var _cancel:Dynamic;
+    static var _cancelAll:Dynamic;
 
     public function new():Void {}
 
@@ -16,16 +16,16 @@ class AndroidLocalNotifications implements LocalNotifications {
         _schedule(notification.id, notification.title, notification.textContent, notification.milliseconds, notification.smallIconColor);
     }
 
-    public function cancel(id:Int):Void {
+    public function cancelAll():Void {
         init();
-        _cancel(id);
+        _cancelAll();
     }
 
     function init():Void {
         if(_schedule == null) {
             #if android
             _schedule = JNI.createStaticMethod("com/thomasuster/LocalNotifications", "schedule", "(ILjava/lang/String;Ljava/lang/String;II)V");
-            _cancel = JNI.createStaticMethod("com/thomasuster/LocalNotifications", "cancel", "(I)V");
+            _cancelAll = JNI.createStaticMethod("com/thomasuster/LocalNotifications", "cancelAll", "()V");
             #end
         }
     }

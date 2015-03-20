@@ -64,23 +64,10 @@ namespace localnotifications {
         [notification release];
     }
 
-    void _cancel(int id) {
-        NSLog(@"cancel: %d", id);
-        UIApplication *app = [UIApplication sharedApplication];
-        NSArray *eventArray = [app scheduledLocalNotifications];
-        NSLog(@"count: %d", [eventArray count]);
-        for (int i=0; i<[eventArray count]; i++) {
-            UILocalNotification* oneEvent = [eventArray objectAtIndex:i];
-            NSDictionary *userInfoCurrent = oneEvent.userInfo;
-            int _id = [userInfoCurrent[@"id"] intValue];
-            NSLog(@"_id: %d", _id);
-            if (_id == id) {
-                NSLog(@"canceled! %d", id);
-                //Cancelling local notification
-                [app cancelLocalNotification:oneEvent];
-                break;
-            }
-        }
+    void _cancelAll() {
+        NSLog(@"cancelAll:");
+        [[UIApplication sharedApplication] cancelAllLocalNotifications];
+        NSLog(@"cancelAllLocalNotifications");
     }
 }
 

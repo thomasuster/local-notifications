@@ -45,4 +45,10 @@ public class NotificationModel extends SQLiteOpenHelper {
         db.execSQL(sqlString);
         db.close();
     }
+
+    public void removeAll() {
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("DELETE FROM notifications");
+        db.close();
+    }
 }

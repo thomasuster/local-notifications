@@ -26,12 +26,11 @@ void schedule(value id, value body, value sec){
 
 DEFINE_PRIM (schedule, 3);
 
-void cancel(value id){
-    int cInt=val_int(id);
-    _cancel(cInt);
+void cancelAll(){
+    _cancelAll();
 }
 
-DEFINE_PRIM (cancel, 1);
+DEFINE_PRIM (cancelAll, 0);
 
 extern "C" void localnotifications_main () {
 
