@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteDatabase;
 
 public class NotificationModel extends SQLiteOpenHelper {
 
@@ -33,13 +34,15 @@ public class NotificationModel extends SQLiteOpenHelper {
     public void add(NotificationVO vo) {
         String sqlString = "INSERT INTO notifications (id, packageName, title, textContent, smallIconColor, ms)  \n";
         sqlString += String.format("VALUES (%d,\"%s\",\"%s\",\"%s\",%d,%d)", vo.id, vo.packageName, vo.title, vo.textContent, vo.smallIconColor, vo.ms);
-        getWritableDatabase().execSQL(sqlString);
-        close();
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL(sqlString);
+        db.close();
     }
 
     public void remove(int id) {
         String sqlString = String.format("DELETE FROM notifications WHERE ID = %s", id);
-        getWritableDatabase().execSQL(sqlString);
-        close();
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL(sqlString);
+        db.close();
     }
 }

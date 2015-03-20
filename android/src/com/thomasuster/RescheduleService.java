@@ -3,6 +3,7 @@ package com.thomasuster;
 import android.app.IntentService;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import com.thomasuster.persistence.NotificationModel;
 import com.thomasuster.persistence.NotificationVO;
 
@@ -27,7 +28,8 @@ public class RescheduleService extends IntentService {
     private void makeVOs() {
         vos = new ArrayList<NotificationVO>();
         NotificationModel model = new NotificationModel(this);
-        Cursor cursor = model.getReadableDatabase().rawQuery("SELECT * FROM notifications", null);
+        SQLiteDatabase db = model.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM notifications", null);
         Calendar now = Calendar.getInstance();
         while(cursor.moveToNext()) {
             int index = cursor.getColumnIndex("ms");
@@ -45,26 +47,21 @@ public class RescheduleService extends IntentService {
                 vos.add(vo);
             }
         }
-        model.close();
+        db.close();
     }
 
     private void removeAll() {
         NotificationModel model = new NotificationModel(this);
-        model.getWritableDatabase().execSQL("DELETE FROM notifications");
-        model.close();
+        SQLiteDatabase db = model.getWritableDatabase();
+        db.execSQL("DELETE FROM notifications");
+        db.close();
     }
 
     private void reschedule() {
+        Scheduler scheduler = new Scheduler();
         for (int i = 0; i < vos.size(); i++) {
             NotificationVO vo = vos.get(i);
-            Intent serviceIntent = new Intent(this, ScheduleService.class);
-            serviceIntent.putExtra("id", vo.id);
-            serviceIntent.putExtra("packageName", vo.packageName);
-            serviceIntent.putExtra("title", vo.title);
-            serviceIntent.putExtra("textContent", vo.textContent);
-            serviceIntent.putExtra("smallIconColor", vo.smallIconColor);
-            serviceIntent.putExtra("ms", vo.ms);
-            startService(serviceIntent);
+            scheduler.schedule(this, vo);
         }
     }
 }

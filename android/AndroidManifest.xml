@@ -3,7 +3,6 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <application>
-        <service android:name=".ScheduleService" />
         <service android:name=".NotifyService" />
         <service android:name=".RescheduleService" />
         <receiver android:name=".LaunchReceiver" />
