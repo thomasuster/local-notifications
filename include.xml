@@ -8,6 +8,6 @@
         <android extension="com.thomasuster.LocalNotifications" />
     </section>
     
-    <ndll name="localnotifications" />
+    <ndll name="localnotifications" if="ios"/>
 
 </extension>
