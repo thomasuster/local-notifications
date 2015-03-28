@@ -1,6 +1,6 @@
 # local-notifications (Private Repo)
 
-OpenFL extension for Android Local Notifications
+OpenFL extension for Android & iOS Local Notifications
 
 ### Getting Started
 
