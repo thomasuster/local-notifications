@@ -20,12 +20,17 @@ namespace localnotifications {
     UIApplication *application;
     UIUserNotificationSettings *settings;
 
-    void _init_ios() {
-        application=[UIApplication sharedApplication];
-        // The following line must only run under iOS 8. This runtime check prevents
-        // it from running if it doesn't exist (such as running under iOS 7 or earlier).
+    // The following line must only run under iOS 8. This runtime check prevents
+    // it from running if it doesn't exist (such as running under iOS 7 or earlier).
+    bool isNewEnough() {
         float version=[[[UIDevice currentDevice] systemVersion] floatValue];
-        if (version >= 8.0){
+        return version >= 8.0;
+    }
+
+
+    void _init_ios() {
+        if (isNewEnough()){
+            application=[UIApplication sharedApplication];
             settings=[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge|UIUserNotificationTypeAlert|UIUserNotificationTypeSound) categories:nil];
             [application registerUserNotificationSettings:settings];
             [application registerForRemoteNotifications];
@@ -33,6 +38,8 @@ namespace localnotifications {
     }
 
     int _isAllowed() {
+        if(!isNewEnough())
+            return 1;
         UIUserNotificationSettings *grantedSettings = [[UIApplication sharedApplication] currentUserNotificationSettings];
         if(grantedSettings.types == UIUserNotificationTypeNone)
             return 0;
