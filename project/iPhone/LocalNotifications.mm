@@ -56,9 +56,11 @@ namespace localnotifications {
         notification.alertBody = alertBody;
         notification.fireDate = [[NSDate date] dateByAddingTimeInterval:sec];
 
-        UIUserNotificationSettings *grantedSettings = [[UIApplication sharedApplication] currentUserNotificationSettings];
-        if (grantedSettings.types & UIUserNotificationTypeSound)
-            notification.soundName=UILocalNotificationDefaultSoundName;
+        if(isNewEnough()) {
+            UIUserNotificationSettings *grantedSettings = [[UIApplication sharedApplication] currentUserNotificationSettings];
+            if (grantedSettings.types & UIUserNotificationTypeSound)
+                notification.soundName=UILocalNotificationDefaultSoundName;
+        }
 
         NSDictionary *userDict = [NSDictionary dictionaryWithObjectsAndKeys:
                                              [NSNumber numberWithInt:id],@"id",
