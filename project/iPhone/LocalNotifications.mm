@@ -50,10 +50,8 @@ namespace localnotifications {
         NSLog(@"Sec: %d", sec);
 
 
-        NSString* alertBody=[[NSString alloc] initWithUTF8String:body];
-
         UILocalNotification *notification = [[UILocalNotification alloc] init];
-        notification.alertBody = alertBody;
+        notification.alertBody = [[NSString alloc] initWithUTF8String:body];
         notification.fireDate = [[NSDate date] dateByAddingTimeInterval:sec];
 
         if(isNewEnough()) {
