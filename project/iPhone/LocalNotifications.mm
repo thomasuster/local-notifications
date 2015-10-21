@@ -47,9 +47,6 @@ namespace localnotifications {
     }
 
     void _schedule(int id, const char* body, int sec) {
-        NSLog(@"Sec: %d", sec);
-
-
         UILocalNotification *notification = [[UILocalNotification alloc] init];
         notification.alertBody = [[NSString alloc] initWithUTF8String:body];
         notification.fireDate = [[NSDate date] dateByAddingTimeInterval:sec];
@@ -65,16 +62,13 @@ namespace localnotifications {
                                              nil];
         notification.userInfo = userDict;
 
-        NSLog(@"notification_add");
         [[UIApplication sharedApplication] scheduleLocalNotification:notification];
 
         [notification release];
     }
 
     void _cancelAll() {
-        NSLog(@"cancelAll:");
         [[UIApplication sharedApplication] cancelAllLocalNotifications];
-        NSLog(@"cancelAllLocalNotifications");
     }
 }
 
