@@ -1,6 +1,6 @@
 # local-notifications (Private Repo)
 
-OpenFL extension for Android & iOS Local Notifications
+NME extension for Android & iOS Local Notifications
 
 ### Getting Started
 
@@ -9,10 +9,10 @@ OpenFL extension for Android & iOS Local Notifications
   ```
 	git clone git@github.com:thomasuster/local-notifications.git
   ```
-1. Add this to your project.xml
+1. Add haxelib
 
   ```
-<include path="../local-notifications/include.xml" />
+    haxelib dev local-notifications local-notifications
   ```
   
 1. Add this this to your project
@@ -29,5 +29,5 @@ OpenFL extension for Android & iOS Local Notifications
   ```
 1. 
   ```
-  openfl test android
+  nme test android
   ```
