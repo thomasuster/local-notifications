@@ -32,7 +32,7 @@ public class Scheduler {
         if(delayMS < 0)
             delayMS = 0;
         long delay = SystemClock.elapsedRealtime() + delayMS;
-        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        alarmManager.setAndAllowWhileIdle(AlarmManager.ELAPSED_REALTIME_WAKEUP, delay, pendingIntent);
+        AlarmManagerProxy alarmManager = new AlarmManagerProxy(context);
+        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, delay, pendingIntent);
     }
 }

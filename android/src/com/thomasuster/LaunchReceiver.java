@@ -19,14 +19,14 @@ public class LaunchReceiver extends BroadcastReceiver {
         String packageName = intent.getStringExtra("packageName");
         Intent launchIntent = manager.getLaunchIntentForPackage(packageName);
         launchIntent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        delayLaunchSoNotificationCloses(launchIntent);
+        delayLaunchSoNotificationCloses(context, launchIntent);
     }
 
-    private void delayLaunchSoNotificationCloses(Intent launchIntent) {
+    private void delayLaunchSoNotificationCloses(Context context, Intent launchIntent) {
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, launchIntent, Intent.FLAG_ACTIVITY_NEW_TASK);
         long ms = SystemClock.elapsedRealtime() + 300;
-        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        alarmManager.setAndAllowWhileIdle(AlarmManager.ELAPSED_REALTIME_WAKEUP, ms, pendingIntent);
+        AlarmManagerProxy alarmManager = new AlarmManagerProxy(context);
+        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, ms, pendingIntent);
     }
 
 }
