@@ -6,14 +6,9 @@ NME extension for Android & iOS Local Notifications
 
 1. Fork your own copy of thomasuster/local-notifications
 1. Clone your copy
-  ```
-	git clone git@github.com:thomasuster/local-notifications.git
-  ```
+  ```git clone git@github.com:thomasuster/local-notifications.git```
 1. Add haxelib
-
-  ```
-    haxelib dev local-notifications local-notifications
-  ```
+  ```haxelib dev local-notifications local-notifications```
   
 1. Add this this to your project
   ```
@@ -28,6 +23,4 @@ NME extension for Android & iOS Local Notifications
 	//localNotifications.cancel(1);
   ```
 1. 
-  ```
-  nme test android
-  ```
+  ```nme test android```
