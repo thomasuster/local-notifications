@@ -1,4 +1,4 @@
-# local-notifications (Private Repo)
+# local-notifications
 
 NME extension for Android & iOS Local Notifications
 
