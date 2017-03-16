@@ -5,7 +5,7 @@
     <application>
         <service android:name=".NotifyService" />
         <service android:name=".RescheduleService" />
-        <receiver android:name=".LaunchReceiver" />
+        <receiver android:name=".LaunchReceiver" android:exported="true" />
         <receiver android:name=".BootRescheduleReceiver" android:enabled="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
