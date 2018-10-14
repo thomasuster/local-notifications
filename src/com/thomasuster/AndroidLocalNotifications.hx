@@ -24,8 +24,8 @@ class AndroidLocalNotifications implements LocalNotifications {
     function init():Void {
         if(_schedule == null) {
             #if android
-            _schedule = JNI.createStaticMethod("com/thomasuster/LocalNotifications", "schedule", "(ILjava/lang/String;Ljava/lang/String;II)V");
-            _cancelAll = JNI.createStaticMethod("com/thomasuster/LocalNotifications", "cancelAll", "()V");
+            _schedule = JNI.createStaticMethod("com/thomasuster/localNotifications/LocalNotifications", "schedule", "(ILjava/lang/String;Ljava/lang/String;II)V");
+            _cancelAll = JNI.createStaticMethod("com/thomasuster/localNotifications/LocalNotifications", "cancelAll", "()V");
             #end
         }
     }
