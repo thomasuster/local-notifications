@@ -1,11 +1,11 @@
-package com.thomasuster;
+package com.thomasuster.localNotifications;
 
 import android.app.IntentService;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import com.thomasuster.persistence.NotificationModel;
-import com.thomasuster.persistence.NotificationVO;
+import com.thomasuster.localNotifications.persistence.NotificationModel;
+import com.thomasuster.localNotifications.persistence.NotificationVO;
 
 import java.util.ArrayList;
 import java.util.Calendar;

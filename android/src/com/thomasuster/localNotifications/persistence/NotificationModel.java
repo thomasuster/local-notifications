@@ -1,4 +1,4 @@
-package com.thomasuster.persistence;
+package com.thomasuster.localNotifications.persistence;
 
 import android.content.Context;
 import android.database.Cursor;

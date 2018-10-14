@@ -1,4 +1,4 @@
-package com.thomasuster;
+package com.thomasuster.localNotifications;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -7,8 +7,8 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import com.thomasuster.persistence.NotificationModel;
-import com.thomasuster.persistence.NotificationVO;
+import com.thomasuster.localNotifications.persistence.NotificationModel;
+import com.thomasuster.localNotifications.persistence.NotificationVO;
 import org.haxe.extension.Extension;
 
 import java.util.Calendar;

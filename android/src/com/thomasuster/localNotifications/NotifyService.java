@@ -1,4 +1,4 @@
-package com.thomasuster;
+package com.thomasuster.localNotifications;
 
 import android.app.IntentService;
 import android.app.Notification;
@@ -10,7 +10,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
-import com.thomasuster.persistence.NotificationModel;
+import com.thomasuster.localNotifications.persistence.NotificationModel;
 
 public class NotifyService extends IntentService {
 

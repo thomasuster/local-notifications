@@ -1,4 +1,4 @@
-package com.thomasuster.persistence;
+package com.thomasuster.localNotifications.persistence;
 
 public class NotificationVO {
     public int id;

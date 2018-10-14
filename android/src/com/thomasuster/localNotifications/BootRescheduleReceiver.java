@@ -1,4 +1,4 @@
-package com.thomasuster;
+package com.thomasuster.localNotifications;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
