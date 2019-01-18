@@ -23,4 +23,10 @@ NME extension for Android & iOS Local Notifications
   //localNotifications.cancel(1);
   ```
 1. 
-  ```nme test android```
+  ```nme test android -gradle```
+
+### Helpful for debugging
+
+adb shell am broadcast -a android.intent.action.BOOT_COMPLETED
+
+adb logcat -s System.out

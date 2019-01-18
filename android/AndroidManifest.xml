@@ -4,7 +4,6 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <application>
         <service android:name=".NotifyService" />
-        <service android:name=".RescheduleService" />
         <receiver android:name=".LaunchReceiver" android:exported="true" />
         <receiver android:name=".BootRescheduleReceiver" android:enabled="true">
             <intent-filter>

@@ -6,20 +6,18 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import com.thomasuster.localNotifications.persistence.NotificationModel;
 import com.thomasuster.localNotifications.persistence.NotificationVO;
-
+import android.util.Log;
 import java.util.ArrayList;
 import java.util.Calendar;
+import android.content.Context;
 
-public class RescheduleService extends IntentService {
+public class Rescheduler {
 
     private ArrayList<NotificationVO> vos;
-
-    public RescheduleService() {
-        super("RescheduleService");
-    }
-
-    @Override
-    protected void onHandleIntent(Intent intent) {
+    private Context context;
+    
+    public void run(Context context) {
+        this.context = context;
         makeVOs();
         removeAll();
         reschedule();
@@ -27,7 +25,7 @@ public class RescheduleService extends IntentService {
 
     private void makeVOs() {
         vos = new ArrayList<NotificationVO>();
-        NotificationModel model = new NotificationModel(this);
+        NotificationModel model = new NotificationModel(context);
         SQLiteDatabase db = model.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM notifications", null);
         Calendar now = Calendar.getInstance();
@@ -51,7 +49,7 @@ public class RescheduleService extends IntentService {
     }
 
     private void removeAll() {
-        NotificationModel model = new NotificationModel(this);
+        NotificationModel model = new NotificationModel(context);
         SQLiteDatabase db = model.getWritableDatabase();
         db.execSQL("DELETE FROM notifications");
         db.close();
@@ -61,7 +59,7 @@ public class RescheduleService extends IntentService {
         Scheduler scheduler = new Scheduler();
         for (int i = 0; i < vos.size(); i++) {
             NotificationVO vo = vos.get(i);
-            scheduler.schedule(this, vo);
+            scheduler.schedule(context, vo);
         }
     }
 }
