@@ -26,6 +26,12 @@ public class NotifyService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
+        
+        //https://developer.android.com/reference/android/app/IntentService.html#onHandleIntent(android.content.Intent)
+        //This may be null if the service is being restarted after its process has gone away
+        if(intent == null)
+            return;
+        
         id = intent.getIntExtra("id", 0);
         packageName = intent.getStringExtra("packageName");
         title = intent.getStringExtra("title");
