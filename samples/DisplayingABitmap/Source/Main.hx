@@ -9,6 +9,8 @@ import flash.events.Event;
 
 class Main extends Sprite {
     
+    var memory:Array<String> = [];
+
     public function new () {
         
         super ();
@@ -36,7 +38,14 @@ class Main extends Sprite {
         android.schedule(notification);
     }
 
+    /*
+    haxelib run nme test android -toolkit -gradle -debug -toolkit-debug
+    adb logcat | grep "Using OpenglES 2.0"
+     */
     function onActivate(event:Event):Void {
+        for (i in 0...100000) {
+            memory.push('${Math.random()}');
+        }
         scheduleNotification();
     }
 }
