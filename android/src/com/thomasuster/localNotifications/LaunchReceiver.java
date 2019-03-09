@@ -23,7 +23,7 @@ public class LaunchReceiver extends BroadcastReceiver {
     }
 
     private void delayLaunchSoNotificationCloses(Context context, Intent launchIntent) {
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, launchIntent, Intent.FLAG_ACTIVITY_NEW_TASK);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, launchIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         long ms = SystemClock.elapsedRealtime() + 300;
         AlarmManagerProxy alarmManager = new AlarmManagerProxy(context);
         alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, ms, pendingIntent);
